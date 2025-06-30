@@ -1,5 +1,6 @@
 using Xunit;
 using FluentAssertions;
+using TripServiceKata.Trip;
 
 namespace TripServiceKata.Tests
 {
@@ -8,6 +9,7 @@ namespace TripServiceKata.Tests
         [Fact]
         public void Foo()
         {
+            var sut = new TripService();
             true.Should().Be(false);
         }
     }
