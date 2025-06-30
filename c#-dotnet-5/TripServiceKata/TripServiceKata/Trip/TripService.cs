@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TripServiceKata.Exception;
 using TripServiceKata.User;
 
@@ -10,18 +11,10 @@ namespace TripServiceKata.Trip
         {
             List<Trip> tripList = new List<Trip>();
             User.User loggedUser = GetLoggedUser();
-            bool isFriend = false;
             if (loggedUser == null)
                 throw new UserNotLoggedInException();
-            
-            foreach(User.User friend in user.GetFriends())
-            {
-                if (friend.Equals(loggedUser))
-                {
-                    isFriend = true;
-                    break;
-                }
-            }
+
+            bool isFriend = user.GetFriends().Contains(loggedUser);
             if (isFriend)
             {
                 tripList = TripDAO.FindTripsByUser(user);
