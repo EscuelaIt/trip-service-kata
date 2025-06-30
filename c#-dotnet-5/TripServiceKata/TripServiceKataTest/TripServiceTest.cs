@@ -1,24 +1,22 @@
 using System;
 using Xunit;
 using FluentAssertions;
-using TripServiceKata.Trip;
 
 namespace TripServiceKata.Tests
 {
     public class TripServiceTest
     {
-        // Step 1: the easiest test is the one from the not logged in user
         [Fact]
-        public void UserNotLoggedIn_ShouldRaise()
+        public void UserNotLoggedIn_ShouldRaise_AfterRefactoring()
         {
             // Arrange
-            var tripService = new TripServiceKata.Trip.TripService();
-
+            var sut = new TripService_WhenUserIsNotLogged();
+        
             // Act
-            Action act = () => tripService.GetTripsByUser(new User.User());
-
+            Action act = () => sut.GetTripsByUser(new());
+        
             // Assert
-            act.Should().Throw<TripServiceKata.Exception.UserNotLoggedInException>();
+            act.Should().Throw<Exception.UserNotLoggedInException>();
         }
     }
 }
